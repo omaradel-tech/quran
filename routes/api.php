@@ -23,9 +23,11 @@ Route::group([
         Route::post('/auth/register', 'AuthController@register');
 
         Route::group([ 'middleware' => ['auth:sanctum'] ] ,function(){
-            Route::get('test' , function (){
-                return 123;
-            });
+            Route::get('editions', 'QuranController@getAllEditions');
+            Route::get('editions/{edition}', 'QuranController@getEditionSurahWithAyahs');
+            Route::get('surahs', 'QuranController@getAllsurahs');
+            Route::get('surahs/{surah}', 'QuranController@getSurahWithAyahs');
+            Route::get('search', 'QuranController@searchInAyahs');
         });
     }
 );
