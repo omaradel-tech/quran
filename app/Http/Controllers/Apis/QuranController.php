@@ -20,7 +20,6 @@ class QuranController extends BaseController
 {
     public function getAllEditions(Request $request)
     {
-        // return Surah::with('ayahs')->find(2)->lastPage();
         $editions = Edition::all();
 
         return $this->success(EditionResource::collection($editions));

@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('ayah_edition', function (Blueprint $table) {
-            $table->foreignId('ayah_id')->change();
-            $table->foreignId('edition_id ')->change();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('image_path')->nullable();
         });
     }
 
@@ -26,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('ayah_edition', function (Blueprint $table) {
-            //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('image_path');
         });
     }
 };

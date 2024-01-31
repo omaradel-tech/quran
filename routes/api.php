@@ -23,6 +23,8 @@ Route::group([
         Route::post('/auth/register', 'AuthController@register');
 
         Route::group([ 'middleware' => ['auth:sanctum'] ] ,function(){
+            Route::get('profile', 'AuthController@profile');
+            Route::post('profile', 'AuthController@updateProfile');
             Route::get('editions', 'QuranController@getAllEditions');
             Route::get('editions/{edition}', 'QuranController@getEditionSurahWithAyahs');
             Route::get('surahs', 'QuranController@getAllsurahs');

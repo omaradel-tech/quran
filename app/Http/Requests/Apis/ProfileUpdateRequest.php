@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Apis;
 
 use App\Constants\GenderConstant;
+use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Rule;
 
-class RegisterRequest extends FormRequest
+class ProfileUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,7 +18,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->guest();
+        return auth()->check();
     }
 
     /**
@@ -28,12 +29,11 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:2', 'max:220'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required',  'min:6', 'confirmed', 'max:220', Password::defaults()],
-            'gender' => ['required', 'in:'.implode(',' , GenderConstant::values())],
-            'phone' => ['required', 'min:10', 'max:220'],
-            'image' => ['sometimes', 'image']
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', Rule::unique(User::class)->ignore(auth()->user()->id)],
+            'image' => ['sometimes', 'image'],
+            'gender' => ['required','in:'.implode(',', GenderConstant::getList())],
+            'phone' => ['required', 'string', 'min:11','max:13'],
         ];
     }
 
