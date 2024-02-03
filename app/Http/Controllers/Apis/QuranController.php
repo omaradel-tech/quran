@@ -67,8 +67,8 @@ class QuranController extends BaseController
     {
         $param = $request->input('term');
 
-        return Surah::whereHas('ayahs', fn($query) => $query->where('text','like' ,"%{$param}%"))
-                ->with(['ayahs' => fn($query) => $query->where('text','like' ,"%{$param}%")])
+        return Surah::whereHas('ayahs', fn($query) => $query->where('textWithouttashkeel','like' ,"%{$param}%"))
+                ->with(['ayahs' => fn($query) => $query->where('textWithouttashkeel','like' ,"%{$param}%")])
                 ->get();
     }
 }

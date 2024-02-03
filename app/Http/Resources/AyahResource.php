@@ -24,6 +24,8 @@ class AyahResource extends JsonResource
             'hizb_id'=> $this->hizb_id,
             'juz_id'=> $this->juz_id,
             'sajda' => $this->sajda,
+            'textWithouttashkeel' => $this->textWithouttashkeel,
+            'audio' => $this->audio,
         ];
     }
 }

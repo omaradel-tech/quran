@@ -24,7 +24,9 @@ class Ayah extends Authenticatable
         'surah_id',
         'hizb_id',
         'juz_id',
-        'sajda'
+        'sajda',
+        'textWithouttashkeel',
+        'audio'
     ];
 
     public function surah()

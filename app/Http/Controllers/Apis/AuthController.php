@@ -68,7 +68,7 @@ class AuthController extends BaseController
             $image->move(public_path('images'), $filename);
             $imagePath = 'images/' . $filename;
         }
-
+    /** @var \App\Models\User $user **/
         $user = auth()->user();
 
         $user->email = $request->email;
