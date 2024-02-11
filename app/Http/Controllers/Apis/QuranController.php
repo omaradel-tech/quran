@@ -41,17 +41,22 @@ class QuranController extends BaseController
 
     public function getEditionSurahWithAyahs(Edition $edition, Request $request)
     {
-        $ayahEditions = AyahEdition::with('ayah')->where('edition_id', $edition->id);
+        $ayahEditions = AyahEdition::with('ayah')
+                                    ->where('edition_id', $edition->id);
 
 
         if(isset($request->surah))
         {
-            if(isset($request->ayah))
-            {
-                $ayahsIds = is_array($request->ayah) ? $request->ayah : [$request->ayah];
-            }else{
-                $ayahsIds = Surah::with('ayahs')->find($request->surah)->ayahs->pluck('id');
-            }
+            // if(isset($request->ayah))
+            // {
+            //     $ayahsIds = is_array($request->ayah) ? $request->ayah : [$request->ayah];
+            // }else{
+                $ayahsIds = Surah::with('ayahs')
+                                    ->find($request->surah)
+                                    ->ayahs
+                                    ->when($request->ayah ?? false, fn($q, $ayah) => $q->where('number_in_surah', $ayah))
+                                    ->pluck('id');
+            // }
 
             $ayahEditions = $ayahEditions->whereIn('ayah_id', $ayahsIds)->get();
 
