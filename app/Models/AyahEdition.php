@@ -23,6 +23,7 @@ class AyahEdition extends Authenticatable
         'edition_id',
         'data',
         'is_audio',
+       
     ];
 
     public function ayah()

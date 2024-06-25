@@ -19,6 +19,7 @@ class AyahEditionResource extends JsonResource
             'edition_id' => $this->edition_id,
             'data' => $this->data,
             'ayah' => new AyahResource($this->ayah),
+    
         ];
     }
 }
